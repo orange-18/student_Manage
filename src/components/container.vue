@@ -21,11 +21,20 @@
               <i class="el-icon-menu"></i><span slot="title">学期选课</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="2-1">文化素质选修课</el-menu-item>
-              <el-menu-item index="2-2">通识课选课</el-menu-item>
-              <el-menu-item>体育课选课</el-menu-item>
-              <el-menu-item>辅修、双专业、双学位课</el-menu-item>
-              <el-menu-item>英语选课</el-menu-item>
+              <el-menu-item index="/culturalQuality">文化素质选修课</el-menu-item>
+              <el-menu-item index="/general">通识课选课</el-menu-item>
+              <el-menu-item disabled="true">体育课选课</el-menu-item>
+              <el-menu-item disabled="">辅修、双专业、双学位课</el-menu-item>
+              <el-menu-item disabled>英语选课</el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+          <el-submenu index="3">
+            <template slot="title">
+              <i class="el-icon-menu"></i><span slot="title">没有用的功能</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="edit">编辑信息</el-menu-item>
+              <el-menu-item disabled="">下拉刷新</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -33,7 +42,7 @@
       <el-container>
         <el-header class="elHeader">
           <el-breadcrumb separator="/">
-            <el-breadcrumb-item :to="{path:'/manage'}">home</el-breadcrumb-item>
+            <!-- <el-breadcrumb-item :to="{path:'/manage'}">home</el-breadcrumb-item> -->
             <el-breadcrumb-item v-for="(item,index) in $route.meta" :key="index">{{item}}</el-breadcrumb-item>
           </el-breadcrumb>
           退出登录
