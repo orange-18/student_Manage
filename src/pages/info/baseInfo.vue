@@ -7,5 +7,8 @@
             <el-breadcrumb-item>活动详情</el-breadcrumb-item>
         </el-breadcrumb>
         基本信息a
+        <el-table>
+            <el-table-item></el-table-item>
+        </el-table>
     </div>
 </template>

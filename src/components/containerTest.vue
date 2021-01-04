@@ -4,7 +4,7 @@
       <el-aside class="app-side app-side-left"
                 :class="isCollapse ? 'app-side-collapsed' : 'app-side-expanded'">
         <div class="app-side-logo">
-          <img src="@/assets/logo.png"
+          <img src="@/assets/school.png"
                :width="isCollapse ? '60' : '60'"
                height="60" />
         </div>

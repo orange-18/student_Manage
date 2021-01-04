@@ -10,6 +10,7 @@ import unusualActInfo from '@/pages/info/unusualActInfo'
 import containerTest from '@/components/containerTest'
 import culturalQuality from '@/pages/selectCourse/culturalQuality'
 import general from '@/pages/selectCourse/general'
+import slot from '@/pages/other/slot'
 
 Vue.use(Router)
 
@@ -36,6 +37,7 @@ export default new Router({
         {path: '/unusualActInfo', name: '异动信息', component: unusualActInfo},
         {path: '/culturalQuality', name: '文化素质选修课', component: culturalQuality},
         {path: '/general', name: '通修课', component: general},
+        {path: '/slot', name: '插槽', component: slot},
       ]
     },
     {
