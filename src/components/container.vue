@@ -33,9 +33,11 @@
               <i class="el-icon-orange"></i><span slot="title">没有用的功能</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="edit">编辑信息</el-menu-item>
+              <el-menu-item index="/edit">编辑信息</el-menu-item>
               <el-menu-item disabled>下拉刷新</el-menu-item>
               <el-menu-item index="/slot">插槽</el-menu-item>
+              <el-menu-item index="/compute">计算属性</el-menu-item>
+              <el-menu-item index="/watch">侦听属性</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -67,11 +69,12 @@
           <div @mouseover="showMenu(3,true)" @mouseout="showMenu(3,false)"><i class="el-icon-orange"></i></div>
           <ul class="submenu-3" @mouseover="showMenu(3,true)" @mouseout="showMenu(3,false)">
             <li @click="$router.push('/edit')">编辑信息</li>
+            <li @click="$router.push('/compute')">计算属性</li>
           </ul>
         </li>
       </ul>
-      <el-container>
-        <el-header class="elHeader">
+      <el-container style="background:#f0f0f0">
+        <el-header class="elHeader" :class="collapsed?'header-icon':'header-text'">
           <!-- <el-breadcrumb separator="/">
             <el-breadcrumb-item v-for="(item,index) in $route.meta" :key="index">{{item}}</el-breadcrumb-item>
           </el-breadcrumb> -->
@@ -79,29 +82,55 @@
             <i class="el-icon-s-fold" v-show="!collapsed" @click="showCollapse"></i>
             <i class="el-icon-s-unfold" v-show="collapsed" @click="showCollapse"></i>
           </div>
+          <!-- 面包屑导航 -->
+          <!-- <my-bread-crumb></my-bread-crumb> -->
+          <!-- <div>
+            <el-breadcrumb>
+              <el-breadcrumb-item :to="{path: '/baseInfo'}">首页</el-breadcrumb-item>
+              <el-breadceumb-ite>{{level2}}</el-breadceumb-ite>
+              <el-breadceumb-ite>{{level3}}</el-breadceumb-ite>
+              <el-breadceumb-ite v-show="showLevel4">{{level4}}</el-breadceumb-ite>
+            </el-breadcrumb>
+          </div> -->
           <div>
             退出登录
           </div>
         </el-header>
-        <router-view></router-view><!-- 路由出口，即右侧显示部分 -->
+        <div><i></i></div>
+        <router-view style="margin-top:100px"></router-view><!-- 路由出口，即右侧显示部分 -->
       </el-container>
     </el-container>
   </div>
 </template>
 <script>
+// import MyBreadCrumb from './MyBreadCrumb'
 export default {
   data(){
     return{
       headerTitle:'首页',
       collapsed: false,
+      showLevel4: false,
     }
   },
+  // components: {
+  //   MyBreadCrumb
+  // },
+  // props: {
+  //   level2: {
+  //     type: String
+  //   },
+  //   level3: {
+  //     type: String
+  //   },
+  //   level4: {
+  //     type: String
+  //   }
+  // },
   mounted(){
     $('.elAside').css('height',$(window).height());    // 设置侧边栏高度为屏幕高度
   },
   methods:{
     handleOpen(key,keypath){
-      console.log(key,'key',keypath,'keypath');
     },
     showCollapse(){
       this.collapsed = !this.collapsed;
@@ -109,6 +138,12 @@ export default {
     showMenu(index,status){
       // this.$refs.menuCollapse.getElementsByClassName('submenu-'+index)[0].style.display = status ? 'block' : 'none';
       document.getElementsByClassName('submenu-' + index)[0].style.display = status ? 'block' : 'none';
+    }
+  },
+  watch:{
+    $route(to,from){
+      console.log(to,'toooo')
+      console.log(from,'frommmm')
     }
   }
 }
@@ -120,6 +155,7 @@ ul{
 .aside-icon{
   width: 70px !important;
   padding: 0;
+  margin-top: 0;
 }
 .aside-icon /deep/ .app-side-logo img{
   width: 40px;
@@ -191,11 +227,21 @@ ul{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 5% 0 1%;
+  height: 60px;
+  position: fixed;
+  background: #fff;
+}
+.header-icon{
+  width: 97%;
+}
+.header-text{
+  width: 88%;
 }
 .el-icon-s-fold,.el-icon-s-unfold{
   font-size: 20px;
   cursor: pointer;
+  color: #212121;
 }
 .el-menu-item:focus, .el-menu-item:hover{
   background-color: transparent;

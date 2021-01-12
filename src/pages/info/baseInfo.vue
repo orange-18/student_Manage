@@ -8,7 +8,14 @@
         </el-breadcrumb>
         基本信息a
         <el-table>
-            <el-table-item></el-table-item>
+            <!-- <el-table-item></el-table-item> -->
         </el-table>
     </div>
 </template>
+<script>
+export default {
+    data(){
+        
+    }
+}
+</script>

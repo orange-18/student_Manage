@@ -6,8 +6,11 @@ import router from './router'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import 'jquery'
+// import MyBreadCrumb from '@/components/MyBreadCrumb'
 
 Vue.use(ElementUI);
+
+// Vue.component(MyBreadCrumb.name,MyBreadCrumb);
 
 Vue.config.productionTip = false
 
