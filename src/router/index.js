@@ -32,18 +32,36 @@ export default new Router({
     {
       path: '/home',
       name: 'home',
+      component: home
+    },
+    {
+      path: '/',
+      name: '个人信息',
       component: container,
       children: [
-        {path: '/home', name:'首页', component: home},
-        {path: '/baseInfo', name:'基本信息', component: baseInfo},
-        {path: '/naturalInfo', name: '自然信息', component: naturalInfo},
-        {path: '/unusualActInfo', name: '异动信息', component: unusualActInfo},
-        {path: '/culturalQuality', name: '文化素质选修课', component: culturalQuality},
-        {path: '/general', name: '通修课', component: general},
-        {path: '/slot', name: '插槽', component: slot},
-        {path: '/edit', name: '编辑信息', component: edit},
-        {path: '/compute', name: '计算属性', component: compute},
-        {path: '/watch', name: '侦听属性', component: watch}
+        {path: '/info/baseInfo', name:'基本信息', component: baseInfo},
+        {path: '/info/naturalInfo', name: '自然信息', component: naturalInfo},
+        {path: '/info/unusualActInfo', name: '异动信息', component: unusualActInfo},
+      ]
+    },
+    {
+      path: '/',
+      name: '学期选课',
+      component: container,
+      children: [
+        {path: '/selectCourse/culturalQuality', name: '文化素质选修课', component: culturalQuality},
+        {path: '/selectCourse/general', name: '通修课', component: general}
+      ]
+    },
+    {
+      path: '/',
+      name: '没有用的功能',
+      component: container,
+      children: [
+        {path: '/other/slot', name: '插槽', component: slot},
+        {path: '/other/edit', name: '编辑信息', component: edit},
+        {path: '/other/compute', name: '计算属性', component: compute},
+        {path: '/other/watch', name: '侦听属性', component: watch}
       ]
     },
     {

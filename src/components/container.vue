@@ -11,9 +11,9 @@
               <i class="el-icon-user"></i><span slot="title">个人信息</span>
             </template>
             <el-menu-item-group class="over-hide">
-              <el-menu-item index="/baseInfo">基本信息</el-menu-item>
-              <el-menu-item index="/naturalInfo">自然信息</el-menu-item>
-              <el-menu-item index="/unusualActInfo">异动信息</el-menu-item>
+              <el-menu-item index="/info/baseInfo">基本信息</el-menu-item>
+              <el-menu-item index="/info/naturalInfo">自然信息</el-menu-item>
+              <el-menu-item index="/info/unusualActInfo">异动信息</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="2">
@@ -21,8 +21,8 @@
               <i class="el-icon-set-up"></i><span slot="title">学期选课</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="/culturalQuality">文化素质选修课</el-menu-item>
-              <el-menu-item index="/general">通识课选课</el-menu-item>
+              <el-menu-item index="/selectCourse/culturalQuality">文化素质选修课</el-menu-item>
+              <el-menu-item index="/selectCourse/general">通识课选课</el-menu-item>
               <el-menu-item disabled>体育课选课</el-menu-item>
               <el-menu-item disabled>辅修、双专业、双学位课</el-menu-item>
               <el-menu-item disabled>英语选课</el-menu-item>
@@ -33,11 +33,11 @@
               <i class="el-icon-orange"></i><span slot="title">没有用的功能</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="/edit">编辑信息</el-menu-item>
+              <el-menu-item index="/other/edit">编辑信息</el-menu-item>
               <el-menu-item disabled>下拉刷新</el-menu-item>
-              <el-menu-item index="/slot">插槽</el-menu-item>
-              <el-menu-item index="/compute">计算属性</el-menu-item>
-              <el-menu-item index="/watch">侦听属性</el-menu-item>
+              <el-menu-item index="/other/slot">插槽</el-menu-item>
+              <el-menu-item index="/other/compute">计算属性</el-menu-item>
+              <el-menu-item index="/other/watch">侦听属性</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -78,12 +78,14 @@
           <!-- <el-breadcrumb separator="/">
             <el-breadcrumb-item v-for="(item,index) in $route.meta" :key="index">{{item}}</el-breadcrumb-item>
           </el-breadcrumb> -->
-          <div>
-            <i class="el-icon-s-fold" v-show="!collapsed" @click="showCollapse"></i>
-            <i class="el-icon-s-unfold" v-show="collapsed" @click="showCollapse"></i>
-          </div>
           <!-- 面包屑导航 -->
-          <!-- <my-bread-crumb></my-bread-crumb> -->
+          <div class="header-left">
+            <div>
+              <i class="el-icon-s-fold" v-show="!collapsed" @click="showCollapse"></i>
+              <i class="el-icon-s-unfold" v-show="collapsed" @click="showCollapse"></i>
+            </div>
+            <my-bread-crumb :level2="level2" :level3="level3" :level4="level4" :showLevel4="showLevel4"></my-bread-crumb>
+          </div>
           <!-- <div>
             <el-breadcrumb>
               <el-breadcrumb-item :to="{path: '/baseInfo'}">首页</el-breadcrumb-item>
@@ -103,33 +105,46 @@
   </div>
 </template>
 <script>
-// import MyBreadCrumb from './MyBreadCrumb'
+import MyBreadCrumb from './MyBreadCrumb'
 export default {
   data(){
     return{
       headerTitle:'首页',
       collapsed: false,
       showLevel4: false,
+      level2: '',
+      level3: '',
+      level4: '',
     }
   },
-  // components: {
-  //   MyBreadCrumb
-  // },
-  // props: {
-  //   level2: {
-  //     type: String
-  //   },
-  //   level3: {
-  //     type: String
-  //   },
-  //   level4: {
-  //     type: String
-  //   }
-  // },
+  components: {
+    MyBreadCrumb
+  },
   mounted(){
     $('.elAside').css('height',$(window).height());    // 设置侧边栏高度为屏幕高度
+    var that = this;
+    that.getMenu();
   },
+  activated(){
+    var that = this;
+    that.getMenu();
+  },
+  // created(){
+  //   var that = this;
+  //   that.getMenu();
+  // },
   methods:{
+    getMenu(){
+      var that = this;
+        console.log(that.$store.state.levelTwo,'55555')
+        console.log(that.$store.state.levelThree,'555552')
+        if(that.level2 = ''){
+          that.level2 = that.$store.state.levelTwo;
+        }
+        if(that.level3 = ''){
+          that.level3 = that.$store.state.levelThree;
+        }
+    },
     handleOpen(key,keypath){
     },
     showCollapse(){
@@ -144,7 +159,13 @@ export default {
     $route(to,from){
       console.log(to,'toooo')
       console.log(from,'frommmm')
-    }
+      var that = this;
+      that.level2 = to.matched[0].name;
+      that.$store.dispatch('setLevelTwo',that.level2);
+      that.level3 = to.name;
+      that.$store.dispatch('setLevelThree',that.level3);
+    },
+
   }
 }
 </script>
@@ -276,5 +297,16 @@ ul{
 .aside-icon li:hover{
   background: #ffb74d;
   color: #333;
+}
+.header-left{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  div:first-of-type{
+    margin-right: 10px;
+  }
+}
+.header-left /deep/ .el-breadcrumb__item:nth-of-type(3) span:last-of-type{
+  display: none;
 }
 </style>
