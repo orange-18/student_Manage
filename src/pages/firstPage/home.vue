@@ -1,8 +1,7 @@
 <template>
     <div>
-        <my-bread-crumb level2="个人信息" level3="基本信息"></my-bread-crumb>
-        <p>基本信息</p>
-        基本信息a
+        <my-bread-crumb level2="首页" level3="首页"></my-bread-crumb>
+        这是首页
     </div>
 </template>
 <script>

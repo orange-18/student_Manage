@@ -31,7 +31,7 @@ export default {
             if(this.username != 'admin' || this.password != '123456'){
                 alert('用户名或密码错误！');
             }else{
-                this.$router.push('/home');
+                this.$router.push('/firstPage/index');
             }
         }
     }

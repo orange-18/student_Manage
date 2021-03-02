@@ -6,6 +6,7 @@
           <img src="@/assets/school.png"/>
         </div>
         <el-menu class="el-menu-vertical-demo" @open="handleOpen" router><!-- router设置路由 index指向的即为路由 -->
+          <el-menu-item index="/firstPage/home" style="padding: 0px;"><div class="el-submenu__title"><i class="el-icon-user"></i><span slot="title">首页</span></div></el-menu-item>
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-user"></i><span slot="title">个人信息</span>
@@ -38,6 +39,15 @@
               <el-menu-item index="/other/slot">插槽</el-menu-item>
               <el-menu-item index="/other/compute">计算属性</el-menu-item>
               <el-menu-item index="/other/watch">侦听属性</el-menu-item>
+              <el-menu-item index="/other/pdf">pdf</el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+          <el-submenu index="4">
+            <template slot="title">
+              <i class="el-icon-monitor"></i><span slot="title">大屏</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="/screen/bigScreen">数据大屏</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -86,19 +96,10 @@
             </div>
             <my-bread-crumb :level2="level2" :level3="level3" :level4="level4" :showLevel4="showLevel4"></my-bread-crumb>
           </div>
-          <!-- <div>
-            <el-breadcrumb>
-              <el-breadcrumb-item :to="{path: '/baseInfo'}">首页</el-breadcrumb-item>
-              <el-breadceumb-ite>{{level2}}</el-breadceumb-ite>
-              <el-breadceumb-ite>{{level3}}</el-breadceumb-ite>
-              <el-breadceumb-ite v-show="showLevel4">{{level4}}</el-breadceumb-ite>
-            </el-breadcrumb>
-          </div> -->
           <div>
             退出登录
           </div>
         </el-header>
-        <div><i></i></div>
         <router-view style="margin-top:100px"></router-view><!-- 路由出口，即右侧显示部分 -->
       </el-container>
     </el-container>
